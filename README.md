@@ -37,7 +37,7 @@ map.addControl(new MapboxPhotonGeocoder({
   includePosition: true,
   bbox: null,
   noResultLabel: 'No result',
-  feedbackEmail: 'photon@komoot.de',
+  feedbackUrl: 'https://github.com/komoot/photon/issues',
   feedbackLabel: 'Feedback',
   popupZoomLevel: 14, // default zoom level for popup
   // if you want to custmize popup content's html
