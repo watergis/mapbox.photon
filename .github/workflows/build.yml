@@ -6,8 +6,8 @@ name: build
 on:
   push:
     branches: [ main ]
-    paths:
-      - "lib/**"
+    # paths:
+    #   - "lib/**"
 
   pull_request:
     paths:
