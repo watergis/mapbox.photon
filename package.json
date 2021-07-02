@@ -19,20 +19,18 @@
   "keywords": [
     "mapbox",
     "mapbox-gl-js",
-    "export",
-    "image",
-    "pdf"
+    "photon"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/watergis/mapbox-gl-export.git"
+    "url": "git+https://github.com/watergis/mapbox.photon.git"
   },
   "author": "Jin IGARASHI",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/watergis/mapbox-gl-export/issues"
+    "url": "https://github.com/watergis/mapbox.photon/issues"
   },
-  "homepage": "https://github.com/watergis/mapbox-gl-export#readme",
+  "homepage": "https://github.com/watergis/mapbox.photon#readme",
   "devDependencies": {
     "@types/geojson": "^7946.0.7",
     "@types/mapbox-gl": "^1.13.0",
