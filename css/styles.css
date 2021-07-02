@@ -25,6 +25,7 @@ ul.photon-autocomplete {
     box-shadow: 0 4px 9px #999999;
     display: none;
     font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding-inline-start: 0px;
 }
 .photon-autocomplete li {
     min-height: 30px;
