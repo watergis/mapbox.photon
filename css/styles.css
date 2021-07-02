@@ -7,11 +7,15 @@
 
 .photon-input {
     font-size: 18px;
+    font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
     background-color: #fff;
     width: 200px;
     height: 30px;
     z-index: 1;
     border-radius: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 ul.photon-autocomplete {
@@ -20,6 +24,7 @@ ul.photon-autocomplete {
     z-index: 1000;
     box-shadow: 0 4px 9px #999999;
     display: none;
+    font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 .photon-autocomplete li {
     min-height: 30px;
@@ -28,6 +33,9 @@ ul.photon-autocomplete {
     overflow: hidden;
     white-space: nowrap;
     font-size: 0.8em;
+    display: list-item;
+    list-style: none;
+    font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 .photon-autocomplete li strong {
     display: block;

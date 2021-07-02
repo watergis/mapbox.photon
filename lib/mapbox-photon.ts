@@ -8,11 +8,9 @@ import PhotonSearch, { PhotonOptions } from './photon-search';
 export default class MapboxPhotonGeocoder implements IControl {
     private controlContainer: HTMLElement;
 
-    private geocoderContainer: HTMLElement;
-
     private map: MapboxMap;
 
-    private textboxControl: HTMLInputElement;
+    private searchBox: HTMLInputElement;
 
     private photonSearch: PhotonSearch;
 
@@ -36,15 +34,12 @@ export default class MapboxPhotonGeocoder implements IControl {
       this.controlContainer = document.createElement('div');
       this.controlContainer.classList.add('mapboxgl-ctrl');
       this.controlContainer.classList.add('mapboxgl-ctrl-group');
-      this.geocoderContainer = document.createElement('div');
-      this.geocoderContainer.classList.add('mapboxgl-geocoder-ctrl');
 
-      this.textboxControl = document.createElement('input');
-      this.photonSearch = new PhotonSearch(this.textboxControl, this.map, this.options);
+      this.searchBox = document.createElement('input');
+      this.controlContainer.appendChild(this.searchBox);
+
+      this.photonSearch = new PhotonSearch(this.searchBox, this.map, this.options);
       this.photonSearch.initialize();
-
-      this.geocoderContainer.appendChild(this.textboxControl);
-      this.controlContainer.appendChild(this.geocoderContainer);
 
       return this.controlContainer;
     }
@@ -53,7 +48,7 @@ export default class MapboxPhotonGeocoder implements IControl {
       if (!this.controlContainer
         || !this.controlContainer.parentNode
         || !this.map
-        || !this.textboxControl) {
+        || !this.searchBox) {
         return;
       }
       this.controlContainer.parentNode.removeChild(this.controlContainer);
