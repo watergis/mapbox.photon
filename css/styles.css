@@ -1,0 +1,55 @@
+.mapboxgl-ctrl-group .mapboxgl-geocoder-ctrl
+{
+    background: transparent;
+    border: none;
+    display: block;
+}
+
+.photon-input {
+    font-size: 18px;
+    background-color: #fff;
+    width: 200px;
+    height: 30px;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+ul.photon-autocomplete {
+    position: relative;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 4px 9px #999999;
+    display: none;
+}
+.photon-autocomplete li {
+    min-height: 30px;
+    line-height: 1em;
+    padding: 5px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.8em;
+}
+.photon-autocomplete li strong {
+    display: block;
+}
+.photon-autocomplete li.on {
+    background-color: #cfcfcf;
+    cursor: pointer;
+}
+.photon-autocomplete li.photon-no-result {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 30px;
+}
+.photon-autocomplete .photon-feedback {
+    display: block;
+    text-align: right;
+    font-size: 0.8em;
+    padding: 3px;
+    color: #999;
+    border-top: 1px solid #eee;
+}
+.photon-input:focus {
+    width: 400px;
+}
