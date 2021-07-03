@@ -25,7 +25,8 @@
         "class-methods-use-this":"off",
         "no-console":"off",
         "import/extensions": "off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "camelcase": "warn"
     },
     "settings": {
         "import/resolver": {

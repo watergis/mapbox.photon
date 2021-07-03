@@ -6,6 +6,7 @@ export type SearchOptions = {
     placeholder?: string;
     minChar?: number;
     limit?: number;
+    osm_tag?: string;
     submitDelay?: number;
     includePosition?: boolean;
     bbox?: number[] | null;
@@ -34,6 +35,7 @@ export default class PhotonSearch {
       placeholder: 'Start typing...',
       minChar: 3,
       limit: 5,
+      osm_tag: undefined,
       submitDelay: 300,
       includePosition: true,
       bbox: null,
@@ -222,6 +224,9 @@ export default class PhotonSearch {
         if (this.options.includePosition) {
           options.lat = center?.lat;
           options.lon = center?.lng;
+        }
+        if (this.options.osm_tag) {
+          options.osm_tag = this.options.osm_tag;
         }
         ajax.request(options).then(this.handleResult.bind(this));
       }

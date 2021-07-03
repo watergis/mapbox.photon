@@ -34,6 +34,8 @@ map.addControl(new MapboxPhotonGeocoder({
     placeholder: 'Start typing...',
     minChar: 3,
     limit: 5,
+    // if you want to filter by osm_tag parameter
+    osm_tag: 'tourism',
     submitDelay: 300,
     includePosition: true,
     bbox: null,

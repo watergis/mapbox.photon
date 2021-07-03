@@ -9,6 +9,7 @@ export type PhotonRequestOptions = {
   language?: string,
   bbox?: number[],
   debug?: boolean,
+  osm_tag?: string,
 }
 
 export default class PhotonRequest {
