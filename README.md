@@ -18,6 +18,8 @@ npm i @watergis/mapbox.photon --save
 
 ## Demo
 
+Try [codesandbox](https://codesandbox.io/s/mapboxphoton-xzmyv).
+
 See [demo](https://watergis.github.io/mapbox.photon/#12/-1.08551/35.87063).
 
 ![demo](./demo.gif)
