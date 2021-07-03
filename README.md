@@ -8,7 +8,7 @@
 
 This module adds control for [Photon](https://github.com/komoot/photon) geocoder.
 
-This plugin was inpired from [leaflet.photon](https://github.com/komoot/leaflet.photon) repository.
+This plugin was inspired from [leaflet.photon](https://github.com/komoot/leaflet.photon) repository.
 
 ## Installation
 
