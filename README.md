@@ -48,11 +48,14 @@ map.addControl(new MapboxPhotonGeocoder({
       console.log(choice);
     }
   },
-  // if you want to custmize popup content's html
   {
+    // after creating a popup, it will zoom to this default zoom level
+    popupZoomLevel: 14,
+    // if you want to custmize popup content's html
     createContent: function(feature) {
-    return feature.properties.name
-  },
+      return feature.properties.name
+    },
+  }
 }), 'top-left');
 ```
 

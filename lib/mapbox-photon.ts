@@ -42,7 +42,6 @@ export default class MapboxPhotonGeocoder implements IControl {
 
       this.popupManager = new PopupManager(
         map,
-        this.searchOptions.popupZoomLevel,
         this.popupOptions,
       );
 

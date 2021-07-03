@@ -1,6 +1,7 @@
 import { Map as MapboxMap, Popup, Marker } from 'mapbox-gl';
 
 export type PopupOptions = {
+  popupZoomLevel?: number,
   createContent?: Function,
 }
 
@@ -9,13 +10,10 @@ export default class PopupManager {
 
     private marker: Marker | null = null;
 
-    private zoom: number;
-
     private options: PopupOptions;
 
-    constructor(map: MapboxMap, zoom: number = 14, options: PopupOptions = {}) {
+    constructor(map: MapboxMap, options: PopupOptions = {}) {
       this.map = map;
-      this.zoom = zoom;
       this.options = options;
     }
 
@@ -62,8 +60,9 @@ export default class PopupManager {
         .addTo(this.map);
       this.marker.togglePopup();
       let currentZoom = this.map.getZoom();
-      if (currentZoom < this.zoom) {
-        currentZoom = this.zoom;
+      const defaultZoom = (this.options.popupZoomLevel) ? this.options.popupZoomLevel : 14;
+      if (currentZoom < defaultZoom) {
+        currentZoom = defaultZoom;
       }
       this.map.flyTo({
         center: lngLat,

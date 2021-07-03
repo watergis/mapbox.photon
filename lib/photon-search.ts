@@ -14,7 +14,6 @@ export type SearchOptions = {
     feedbackUrl?: string,
     feedbackLabel?: string,
     width?: number,
-    popupZoomLevel?: number,
     onSelected?: Function,
 }
 
@@ -42,7 +41,6 @@ export default class PhotonSearch {
       noResultLabel: 'No result',
       feedbackUrl: 'https://github.com/komoot/photon/issues',
       feedbackLabel: 'Feedback',
-      popupZoomLevel: 14,
       onSelected: undefined,
     }
 
