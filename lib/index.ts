@@ -1,4 +1,5 @@
 import MapboxPhotonGeocoder from './mapbox-photon';
 
 export default MapboxPhotonGeocoder;
-export { PhotonOptions } from './photon-search';
+export { SearchOptions, Choice } from './photon-search';
+export { PopupOptions } from './popup-manager';

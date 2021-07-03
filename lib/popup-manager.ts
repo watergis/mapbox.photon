@@ -1,5 +1,9 @@
 import { Map as MapboxMap, Popup, Marker } from 'mapbox-gl';
 
+export type PopupOptions = {
+  createContent?: Function,
+}
+
 export default class PopupManager {
     private map: MapboxMap
 
@@ -7,12 +11,12 @@ export default class PopupManager {
 
     private zoom: number;
 
-    private createContentFunction: Function | undefined;
+    private options: PopupOptions;
 
-    constructor(map: MapboxMap, zoom: number = 14, createContent?: Function) {
+    constructor(map: MapboxMap, zoom: number = 14, options: PopupOptions = {}) {
       this.map = map;
       this.zoom = zoom;
-      this.createContentFunction = createContent;
+      this.options = options;
     }
 
     _createContent(feature: GeoJSON.Feature) : string {
@@ -38,8 +42,8 @@ export default class PopupManager {
     }
 
     createContent(feature: GeoJSON.Feature) {
-      return (this.createContentFunction)
-        ? this.createContentFunction(feature)
+      return (this.options.createContent)
+        ? this.options.createContent(feature)
         : this._createContent(feature);
     }
 

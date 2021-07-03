@@ -30,21 +30,27 @@ import mapboxgl from 'mapbox-gl';
 
 const map = new mapboxgl.Map();
 map.addControl(new MapboxPhotonGeocoder({
-  url: 'https://photon.komoot.de/api/?',
-  placeholder: 'Start typing...',
-  minChar: 3,
-  limit: 5,
-  submitDelay: 300,
-  includePosition: true,
-  bbox: null,
-  noResultLabel: 'No result',
-  feedbackUrl: 'https://github.com/komoot/photon/issues',
-  feedbackLabel: 'Feedback',
-  popupZoomLevel: 14, // default zoom level for popup
+    url: 'https://photon.komoot.de/api/?',
+    placeholder: 'Start typing...',
+    minChar: 3,
+    limit: 5,
+    submitDelay: 300,
+    includePosition: true,
+    bbox: null,
+    noResultLabel: 'No result',
+    feedbackUrl: 'https://github.com/komoot/photon/issues',
+    feedbackLabel: 'Feedback',
+    popupZoomLevel: 14, // default zoom level for popup
+    // default adds a popup, but you may change the behaviour when the POI was selected.
+    onSelected: function(choice) {
+      console.log(choice);
+    }
+  },
   // if you want to custmize popup content's html
-  createContent: function(feature) {
+  {
+    createContent: function(feature) {
     return feature.properties.name
-  }
+  },
 }), 'top-left');
 ```
 

@@ -1,8 +1,7 @@
 import { EventData, Map as MapboxMap } from 'mapbox-gl';
 import PhotonRequest, { PhotonRequestOptions } from './photon-request';
-import PopupManager from './popup-manager';
 
-export type PhotonOptions = {
+export type SearchOptions = {
     url?: string;
     placeholder?: string;
     minChar?: number;
@@ -15,10 +14,10 @@ export type PhotonOptions = {
     feedbackLabel?: string,
     width?: number,
     popupZoomLevel?: number,
-    createContent?: Function,
+    onSelected?: Function,
 }
 
-type Choice = {
+export type Choice = {
   feature: GeoJSON.Feature,
   el: HTMLLIElement,
 }
@@ -30,9 +29,7 @@ export default class PhotonSearch {
 
     private map: MapboxMap;
 
-    private popupManager: PopupManager;
-
-    private options: PhotonOptions = {
+    private options: SearchOptions = {
       url: 'https://photon.komoot.io/api?',
       placeholder: 'Start typing...',
       minChar: 3,
@@ -44,7 +41,7 @@ export default class PhotonSearch {
       feedbackUrl: 'https://github.com/komoot/photon/issues',
       feedbackLabel: 'Feedback',
       popupZoomLevel: 14,
-      createContent: undefined,
+      onSelected: undefined,
     }
 
     private submitDelay: number | null;
@@ -80,17 +77,12 @@ export default class PhotonSearch {
       CTRL: 18,
     }
 
-    constructor(input: HTMLInputElement, map: MapboxMap, options: PhotonOptions) {
+    constructor(input: HTMLInputElement, map: MapboxMap, options: SearchOptions) {
       this.input = input;
       this.map = map;
       if (options) {
         this.options = Object.assign(this.options, options);
       }
-      this.popupManager = new PopupManager(
-        map,
-        this.options.popupZoomLevel,
-        this.options.createContent,
-      );
     }
 
     initialize() {
@@ -235,8 +227,14 @@ export default class PhotonSearch {
       }
     }
 
+    private _onSelected(choise: Choice) {}
+
     private onSelected(choice: Choice) {
-      this.popupManager.add(choice.feature);
+      if (this.options.onSelected) {
+        this.options.onSelected(choice);
+      } else {
+        this._onSelected(choice);
+      }
     }
 
     private formatResult(feature: GeoJSON.Feature, el: HTMLLIElement) {

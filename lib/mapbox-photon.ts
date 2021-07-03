@@ -1,5 +1,6 @@
 import { IControl, Map as MapboxMap } from 'mapbox-gl';
-import PhotonSearch, { PhotonOptions } from './photon-search';
+import PhotonSearch, { SearchOptions, Choice } from './photon-search';
+import PopupManager, { PopupOptions } from './popup-manager';
 
 /**
  * Mapbox GL Geocoder Control for Photon.
@@ -14,14 +15,15 @@ export default class MapboxPhotonGeocoder implements IControl {
 
     private photonSearch: PhotonSearch;
 
-    private options: PhotonOptions;
+    private popupManager: PopupManager;
 
-    constructor(options: PhotonOptions) {
-      if (!options) {
-        this.options = {};
-      } else {
-        this.options = options;
-      }
+    private searchOptions: SearchOptions;
+
+    private popupOptions: PopupOptions;
+
+    constructor(searchOptions: SearchOptions = {}, popupOptions: PopupOptions = {}) {
+      this.searchOptions = searchOptions;
+      this.popupOptions = popupOptions;
     }
 
     public getDefaultPosition(): string {
@@ -38,10 +40,23 @@ export default class MapboxPhotonGeocoder implements IControl {
       this.searchBox = document.createElement('input');
       this.controlContainer.appendChild(this.searchBox);
 
-      this.photonSearch = new PhotonSearch(this.searchBox, this.map, this.options);
+      this.popupManager = new PopupManager(
+        map,
+        this.searchOptions.popupZoomLevel,
+        this.popupOptions,
+      );
+
+      if (!this.searchOptions.onSelected) {
+        this.searchOptions.onSelected = this.onSelected.bind(this);
+      }
+      this.photonSearch = new PhotonSearch(this.searchBox, this.map, this.searchOptions);
       this.photonSearch.initialize();
 
       return this.controlContainer;
+    }
+
+    private onSelected(choice: Choice) {
+      this.popupManager.add(choice.feature);
     }
 
     public onRemove(): void {

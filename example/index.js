@@ -6,8 +6,7 @@ import '../css/styles.css';
     // mapboxgl.accessToken='your mapbox access token'
     const map = new mapboxgl.Map({
         container: 'map',
-        // style: 'mapbox://styles/mapbox/streets-v11',
-        style:'https://narwassco.github.io/mapbox-stylefiles/unvt/style.json',
+        style:'https://narwassco.github.io/naru/style.json',
         center: [35.87063, -1.08551],
         zoom: 12,
         hash:true,
