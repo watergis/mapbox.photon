@@ -6,7 +6,7 @@ export type PhotonOptions = {
     url?: string;
     placeholder?: string;
     minChar?: number;
-    limit?: 5;
+    limit?: number;
     submitDelay?: number;
     includePosition?: boolean;
     bbox?: number[] | null;
