@@ -7,6 +7,7 @@ export type SearchOptions = {
     minChar?: number;
     limit?: number;
     osm_tag?: string;
+    lang?: string;
     submitDelay?: number;
     includePosition?: boolean;
     bbox?: number[];
@@ -35,6 +36,7 @@ export default class PhotonSearch {
       minChar: 3,
       limit: 5,
       osm_tag: undefined,
+      lang: undefined,
       submitDelay: 300,
       includePosition: true,
       bbox: [],

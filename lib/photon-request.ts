@@ -6,7 +6,7 @@ export type PhotonRequestOptions = {
   zoom?: number,
   locationForBias?: number,
   scale?: number,
-  language?: string,
+  lang?: string,
   bbox?: string,
   debug?: boolean,
   osm_tag?: string,
