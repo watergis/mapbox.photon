@@ -25,6 +25,10 @@ See [demo](https://watergis.github.io/mapbox.photon/#12/-1.08551/35.87063).
 ![demo](./demo.gif)
 ## Usage
 
+- note
+
+This plugin uses komoot's photon API (https://photon.komoot.io/api) as default. However, please consider to have your own photon API if you want to use geocoding heavily in order to avoid many traffics for komoot server.
+
 - for geocoding
 
 ```ts
