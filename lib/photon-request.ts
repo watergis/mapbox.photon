@@ -12,6 +12,14 @@ export type PhotonRequestOptions = {
   osm_tag?: string,
 }
 
+export type PhotonReverseOptions = {
+  lang?: string,
+  limit?: number,
+  lat: number,
+  lon: number,
+  osm_tag?: string,
+}
+
 export default class PhotonRequest {
     private url: string;
 
@@ -19,7 +27,7 @@ export default class PhotonRequest {
       this.url = url;
     }
 
-    async request(params: PhotonRequestOptions) {
+    async request(params: PhotonRequestOptions | PhotonReverseOptions) {
       const url = `${this.url}${Object.keys(params).map((k) => `${k}=${params[k]}`).join('&')}`;
       return new Promise<GeoJSON.FeatureCollection>((resolve, reject) => {
         const xhr = new XMLHttpRequest();

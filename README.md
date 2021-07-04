@@ -25,6 +25,8 @@ See [demo](https://watergis.github.io/mapbox.photon/#12/-1.08551/35.87063).
 ![demo](./demo.gif)
 ## Usage
 
+- for geocoding
+
 ```ts
 import MapboxPhotonGeocoder from "@watergis/mapbox.photon";
 import '@watergis/mapbox.photon/css/styles.css';
@@ -59,6 +61,16 @@ map.addControl(new MapboxPhotonGeocoder({
     },
   }
 }), 'top-left');
+```
+
+- for reverse geocoding
+
+```ts
+import { PhotonReverse } from "@watergis/mapbox.photon";
+
+const recverse = new PhotonReverse();
+const result = await recverse.reverse(35.8664039, -1.0861514);
+console.log(result);
 ```
 
 ## Development
