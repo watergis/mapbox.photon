@@ -1,8 +1,8 @@
 import mapboxgl from 'mapbox-gl';
-import MapboxPhotonGeocoder from '../lib/index';
+import MapboxPhotonGeocoder, { PhotonReverse } from '../lib/index';
 import '../css/styles.css';
 
-(()=>{
+(async()=>{
     // mapboxgl.accessToken='your mapbox access token'
     const map = new mapboxgl.Map({
         container: 'map',
@@ -12,5 +12,9 @@ import '../css/styles.css';
         hash:true,
     });
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    map.addControl(new MapboxPhotonGeocoder(), 'top-left');
+    map.addControl(new MapboxPhotonGeocoder({lang:'fr'}), 'top-left');
+
+    const recverse = new PhotonReverse();
+    const result = await recverse.reverse(35.8664039, -1.0861514);
+    console.log(result);
 })()
