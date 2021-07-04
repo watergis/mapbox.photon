@@ -231,6 +231,9 @@ export default class PhotonSearch {
         if (this.options.osm_tag) {
           options.osm_tag = this.options.osm_tag;
         }
+        if (this.options.lang) {
+          options.lang = this.options.lang;
+        }
         ajax.request(options).then(this.handleResult.bind(this));
       }
     }
