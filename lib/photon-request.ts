@@ -7,7 +7,7 @@ export type PhotonRequestOptions = {
   locationForBias?: number,
   scale?: number,
   language?: string,
-  bbox?: number[],
+  bbox?: string,
   debug?: boolean,
   osm_tag?: string,
 }

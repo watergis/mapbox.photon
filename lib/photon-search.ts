@@ -9,7 +9,7 @@ export type SearchOptions = {
     osm_tag?: string;
     submitDelay?: number;
     includePosition?: boolean;
-    bbox?: number[] | null;
+    bbox?: number[];
     noResultLabel?: string,
     feedbackUrl?: string,
     feedbackLabel?: string,
@@ -37,7 +37,7 @@ export default class PhotonSearch {
       osm_tag: undefined,
       submitDelay: 300,
       includePosition: true,
-      bbox: null,
+      bbox: [],
       noResultLabel: 'No result',
       feedbackUrl: 'https://github.com/komoot/photon/issues',
       feedbackLabel: 'Feedback',
@@ -222,6 +222,9 @@ export default class PhotonSearch {
         if (this.options.includePosition) {
           options.lat = center?.lat;
           options.lon = center?.lng;
+        }
+        if (this.options.bbox && this.options.bbox.length === 4) {
+          options.bbox = this.options.bbox.join(',');
         }
         if (this.options.osm_tag) {
           options.osm_tag = this.options.osm_tag;

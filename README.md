@@ -40,7 +40,7 @@ map.addControl(new MapboxPhotonGeocoder({
     osm_tag: 'tourism',
     submitDelay: 300,
     includePosition: true,
-    bbox: null,
+    bbox: [], //specify minx, miny. maxx, maxy if you want to filter by particular area
     noResultLabel: 'No result',
     feedbackUrl: 'https://github.com/komoot/photon/issues',
     feedbackLabel: 'Feedback',
