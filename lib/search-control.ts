@@ -1,4 +1,4 @@
-export type SearchOptions = {
+export type SearchControlOptions = {
     placeholder?: string;
     minChar?: number;
     submitDelay?: number;
@@ -15,12 +15,12 @@ export type Choice = {
   el: HTMLLIElement,
 }
 
-export default class PhotonSearch {
+export default class SearchControl {
     private input: HTMLInputElement;
 
     private resultsContainer: HTMLUListElement;
 
-    private options: SearchOptions = {
+    private options: SearchControlOptions = {
       placeholder: 'Start typing...',
       minChar: 3,
       submitDelay: 300,
@@ -64,7 +64,7 @@ export default class PhotonSearch {
       CTRL: 18,
     }
 
-    constructor(input: HTMLInputElement, options: SearchOptions) {
+    constructor(input: HTMLInputElement, options: SearchControlOptions) {
       this.input = input;
       if (options) {
         this.options = Object.assign(this.options, options);

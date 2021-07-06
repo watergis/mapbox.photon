@@ -1,5 +1,5 @@
 import { IControl, Map as MapboxMap } from 'mapbox-gl';
-import PhotonSearch, { SearchOptions, Choice } from './photon-search';
+import SearchControl, { SearchControlOptions, Choice } from './search-control';
 import PhotonGeocoding, { GeocodingOptions } from './photon-geocoding';
 import PopupManager, { PopupOptions } from './popup-manager';
 
@@ -14,24 +14,24 @@ export default class MapboxPhotonGeocoder implements IControl {
 
     private searchBox: HTMLInputElement;
 
-    private photonSearch: PhotonSearch;
+    private searchControl: SearchControl;
 
     private photonGeocoding: PhotonGeocoding;
 
     private popupManager: PopupManager;
 
-    private searchOptions: SearchOptions;
+    private searchControlOptions: SearchControlOptions;
 
     private geocodingOptions: GeocodingOptions;
 
     private popupOptions: PopupOptions;
 
     constructor(
-      searchOptions: SearchOptions = {},
+      searchControlOptions: SearchControlOptions = {},
       geocodingOptions: GeocodingOptions = {},
       popupOptions: PopupOptions = {},
     ) {
-      this.searchOptions = searchOptions;
+      this.searchControlOptions = searchControlOptions;
       this.geocodingOptions = geocodingOptions;
       this.popupOptions = popupOptions;
     }
@@ -60,12 +60,12 @@ export default class MapboxPhotonGeocoder implements IControl {
         this.popupOptions,
       );
 
-      if (!this.searchOptions.onSelected) {
-        this.searchOptions.onSelected = this.onSelected.bind(this);
+      if (!this.searchControlOptions.onSelected) {
+        this.searchControlOptions.onSelected = this.onSelected.bind(this);
       }
-      this.searchOptions.doSearch = this.photonGeocoding.geocode.bind(this.photonGeocoding);
-      this.photonSearch = new PhotonSearch(this.searchBox, this.searchOptions);
-      this.photonSearch.initialize();
+      this.searchControlOptions.doSearch = this.photonGeocoding.geocode.bind(this.photonGeocoding);
+      this.searchControl = new SearchControl(this.searchBox, this.searchControlOptions);
+      this.searchControl.initialize();
 
       return this.controlContainer;
     }
