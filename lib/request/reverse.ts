@@ -1,4 +1,4 @@
-import PhotonRequest, { PhotonReverseOptions } from './photon-request';
+import PhotonRequest, { PhotonReverseOptions } from './base';
 
 export type ReverseOptions = {
     url?: string;

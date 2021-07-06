@@ -1,4 +1,4 @@
-export type PhotonRequestOptions = {
+export type PhotonGeocodingOptions = {
   q: string,
   limit?: number,
   lon?: number,
@@ -27,7 +27,7 @@ export default class PhotonRequest {
       this.url = url;
     }
 
-    async request(params: PhotonRequestOptions | PhotonReverseOptions) {
+    async request(params: PhotonGeocodingOptions | PhotonReverseOptions) {
       const url = `${this.url}${Object.keys(params).map((k) => `${k}=${params[k]}`).join('&')}`;
       return new Promise<GeoJSON.FeatureCollection>((resolve, reject) => {
         const xhr = new XMLHttpRequest();

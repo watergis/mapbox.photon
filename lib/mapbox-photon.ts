@@ -1,6 +1,6 @@
 import { IControl, Map as MapboxMap } from 'mapbox-gl';
 import SearchControl, { SearchControlOptions, Choice } from './search-control';
-import PhotonGeocoding, { GeocodingOptions } from './photon-geocoding';
+import { PhotonGeocoding, GeocodingOptions } from './request';
 import PopupManager, { PopupOptions } from './popup-manager';
 
 /**

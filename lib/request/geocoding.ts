@@ -1,5 +1,5 @@
 import { Map as MapboxMap } from 'mapbox-gl';
-import PhotonRequest, { PhotonRequestOptions } from './photon-request';
+import PhotonRequest, { PhotonGeocodingOptions } from './base';
 
 export type GeocodingOptions = {
   url?: string;
@@ -34,7 +34,7 @@ export default class PhotonGeocoding {
       const center = this.map.getCenter();
       const zoom = this.map.getZoom() ? this.map?.getZoom() : 14;
       const ajax = new PhotonRequest(this.options.url);
-      const options: PhotonRequestOptions = {
+      const options: PhotonGeocodingOptions = {
         q: query,
         limit: this.options.limit,
         zoom: Math.floor(zoom),
