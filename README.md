@@ -39,23 +39,30 @@ import mapboxgl from 'mapbox-gl';
 
 const map = new mapboxgl.Map();
 map.addControl(new MapboxPhotonGeocoder({
-    url: 'https://photon.komoot.de/api/?',
     placeholder: 'Start typing...',
     minChar: 3,
     limit: 5,
-    // if you want to filter by osm_tag parameter
-    osm_tag: 'tourism',
     submitDelay: 300,
-    includePosition: true,
-    bbox: [], //specify minx, miny. maxx, maxy if you want to filter by particular area
     noResultLabel: 'No result',
     feedbackUrl: 'https://github.com/komoot/photon/issues',
     feedbackLabel: 'Feedback',
-    popupZoomLevel: 14, // default zoom level for popup
     // default adds a popup, but you may change the behaviour when the POI was selected.
     onSelected: function(choice) {
       console.log(choice);
+    },
+    // if you want to customise geocoding function
+    doSearch: function(query, callback) {
+      console.log(query);
     }
+  },
+  {
+    url: 'https://photon.komoot.io/api?',
+    limit: 5,
+    // if you want to filter by osm_tag parameter
+    osm_tag: 'tourism',
+    lang: 'ja',
+    bbox: [], //specify minx, miny. maxx, maxy if you want to filter by particular area
+    includePosition: true,
   },
   {
     // after creating a popup, it will zoom to this default zoom level

@@ -1,5 +1,6 @@
 import { IControl, Map as MapboxMap } from 'mapbox-gl';
 import PhotonSearch, { SearchOptions, Choice } from './photon-search';
+import PhotonGeocoding, { GeocodingOptions } from './photon-geocoding';
 import PopupManager, { PopupOptions } from './popup-manager';
 
 /**
@@ -15,14 +16,23 @@ export default class MapboxPhotonGeocoder implements IControl {
 
     private photonSearch: PhotonSearch;
 
+    private photonGeocoding: PhotonGeocoding;
+
     private popupManager: PopupManager;
 
     private searchOptions: SearchOptions;
 
+    private geocodingOptions: GeocodingOptions;
+
     private popupOptions: PopupOptions;
 
-    constructor(searchOptions: SearchOptions = {}, popupOptions: PopupOptions = {}) {
+    constructor(
+      searchOptions: SearchOptions = {},
+      geocodingOptions: GeocodingOptions = {},
+      popupOptions: PopupOptions = {},
+    ) {
       this.searchOptions = searchOptions;
+      this.geocodingOptions = geocodingOptions;
       this.popupOptions = popupOptions;
     }
 
@@ -40,6 +50,11 @@ export default class MapboxPhotonGeocoder implements IControl {
       this.searchBox = document.createElement('input');
       this.controlContainer.appendChild(this.searchBox);
 
+      this.photonGeocoding = new PhotonGeocoding(
+        map,
+        this.geocodingOptions,
+      );
+
       this.popupManager = new PopupManager(
         map,
         this.popupOptions,
@@ -48,7 +63,8 @@ export default class MapboxPhotonGeocoder implements IControl {
       if (!this.searchOptions.onSelected) {
         this.searchOptions.onSelected = this.onSelected.bind(this);
       }
-      this.photonSearch = new PhotonSearch(this.searchBox, this.map, this.searchOptions);
+      this.searchOptions.doSearch = this.photonGeocoding.geocode.bind(this.photonGeocoding);
+      this.photonSearch = new PhotonSearch(this.searchBox, this.searchOptions);
       this.photonSearch.initialize();
 
       return this.controlContainer;

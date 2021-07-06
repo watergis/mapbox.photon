@@ -1,21 +1,13 @@
-import { EventData, Map as MapboxMap } from 'mapbox-gl';
-import PhotonRequest, { PhotonRequestOptions } from './photon-request';
-
 export type SearchOptions = {
-    url?: string;
     placeholder?: string;
     minChar?: number;
-    limit?: number;
-    osm_tag?: string;
-    lang?: string;
     submitDelay?: number;
-    includePosition?: boolean;
-    bbox?: number[];
     noResultLabel?: string,
     feedbackUrl?: string,
     feedbackLabel?: string,
     width?: number,
     onSelected?: Function,
+    doSearch?: Function,
 }
 
 export type Choice = {
@@ -28,22 +20,15 @@ export default class PhotonSearch {
 
     private resultsContainer: HTMLUListElement;
 
-    private map: MapboxMap;
-
     private options: SearchOptions = {
-      url: 'https://photon.komoot.io/api?',
       placeholder: 'Start typing...',
       minChar: 3,
-      limit: 5,
-      osm_tag: undefined,
-      lang: undefined,
       submitDelay: 300,
-      includePosition: true,
-      bbox: [],
       noResultLabel: 'No result',
       feedbackUrl: 'https://github.com/komoot/photon/issues',
       feedbackLabel: 'Feedback',
       onSelected: undefined,
+      doSearch: undefined,
     }
 
     private submitDelay: number | null;
@@ -79,9 +64,8 @@ export default class PhotonSearch {
       CTRL: 18,
     }
 
-    constructor(input: HTMLInputElement, map: MapboxMap, options: SearchOptions) {
+    constructor(input: HTMLInputElement, options: SearchOptions) {
       this.input = input;
-      this.map = map;
       if (options) {
         this.options = Object.assign(this.options, options);
       }
@@ -117,7 +101,7 @@ export default class PhotonSearch {
       this.resultsContainer.style.width = `${width}px`;
     }
 
-    private onKeyDown(e: EventData): void {
+    private onKeyDown(e: KeyboardEvent): void {
       switch (e.keyCode) {
         case this.KEYS.TAB:
           if (this.CURRENT !== null) {
@@ -205,36 +189,20 @@ export default class PhotonSearch {
     }
 
     private search() {
-      const center = this.map.getCenter();
-      const zoom = this.map.getZoom() ? this.map?.getZoom() : 14;
       const val = this.input.value;
       const minChar = (this.options.minChar && val.length >= this.options.minChar);
       if (!val || !minChar) {
         this.clear();
         return;
       }
-      if (this.options.url && `${val}''` !== `${this.CACHE}''`) {
-        this.CACHE = val;
-        const ajax = new PhotonRequest(this.options.url);
-        const options: PhotonRequestOptions = {
-          q: val,
-          limit: this.options.limit,
-          zoom: Math.floor(zoom),
-        };
-        if (this.options.includePosition) {
-          options.lat = center?.lat;
-          options.lon = center?.lng;
-        }
-        if (this.options.bbox && this.options.bbox.length === 4) {
-          options.bbox = this.options.bbox.join(',');
-        }
-        if (this.options.osm_tag) {
-          options.osm_tag = this.options.osm_tag;
-        }
-        if (this.options.lang) {
-          options.lang = this.options.lang;
-        }
-        ajax.request(options).then(this.handleResult.bind(this));
+      if (`${val}''` === `${this.CACHE}''`) return;
+      this.CACHE = val;
+      this._doSearch(val, this.handleResult.bind(this));
+    }
+
+    private _doSearch(query: string, callback: Function) {
+      if (this.options.doSearch) {
+        this.options.doSearch(query, callback);
       }
     }
 
