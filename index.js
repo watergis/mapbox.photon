@@ -12,7 +12,7 @@ import '../css/styles.css';
         hash:true,
     });
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    map.addControl(new MapboxPhotonGeocoder({lang:'fr'}), 'top-left');
+    map.addControl(new MapboxPhotonGeocoder(), 'top-left');
 
     const recverse = new PhotonReverse();
     const result = await recverse.reverse(35.8664039, -1.0861514);
