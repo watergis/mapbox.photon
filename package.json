@@ -1,6 +1,6 @@
 {
   "name": "@watergis/mapbox.photon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "This module adds control for Photon geocoder.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
