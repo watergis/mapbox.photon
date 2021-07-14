@@ -63,6 +63,7 @@ map.addControl(new MapboxPhotonGeocoder({
     lang: 'ja',
     bbox: [], //specify minx, miny. maxx, maxy if you want to filter by particular area
     includePosition: true,
+    location_bias_scale: 0.2
   },
   {
     // after creating a popup, it will zoom to this default zoom level

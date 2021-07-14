@@ -8,6 +8,7 @@ export type GeocodingOptions = {
   lang?: string;
   bbox?: number[];
   includePosition?: boolean;
+  location_bias_scale?: number,
 }
 
 export default class PhotonGeocoding {
@@ -20,6 +21,7 @@ export default class PhotonGeocoding {
       lang: undefined,
       bbox: [],
       includePosition: true,
+      location_bias_scale: 0.2,
     }
 
     constructor(map: MapboxMap, options: GeocodingOptions) {
@@ -42,6 +44,9 @@ export default class PhotonGeocoding {
       if (this.options.includePosition) {
         options.lat = center?.lat;
         options.lon = center?.lng;
+        if (this.options.location_bias_scale) {
+          options.location_bias_scale = this.options.location_bias_scale;
+        }
       }
       if (this.options.bbox && this.options.bbox.length === 4) {
         options.bbox = this.options.bbox.join(',');
